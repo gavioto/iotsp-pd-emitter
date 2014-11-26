@@ -1,4 +1,19 @@
 GIT
+  remote: git://github.com/ma2shita/fluent-plugin-in_unix_unimsg.git
+  revision: 500e9abe2faebc557a010a7a6eec80a75a9cedc4
+  specs:
+    fluent-plugin-in_unix_unimsg (0.0.1)
+      fluentd
+
+GIT
+  remote: git://github.com/ma2shita/fluent-plugin-out-http-alt.git
+  revision: 468edf97da6f9633ff3c95da18ccd41ffe239302
+  specs:
+    fluent-plugin-out-http-alt (0.0.1)
+      fluentd (~> 0.10.0)
+      yajl-ruby (~> 1.0)
+
+GIT
   remote: git://github.com/ma2shita/fluent-plugin-record-modifier.git
   revision: ebe229d216d661f9c13049908e0d1cd23bb4879d
   branch: include_set_time_key_mixin
@@ -6,19 +21,6 @@ GIT
     fluent-plugin-record-modifier (0.2.0)
       fluent-mixin-config-placeholders (>= 0.3.0)
       fluentd (~> 0.10.17)
-
-PATH
-  remote: /home/ma2shita/Development/iotpf/fluent-plugin-in_unix_unimsg
-  specs:
-    fluent-plugin-in_unix_unimsg (0.0.1)
-      fluentd
-
-PATH
-  remote: /home/ma2shita/Development/iotpf/fluent-plugin-out-http-alt
-  specs:
-    fluent-plugin-out-http-alt (0.0.1)
-      fluentd (~> 0.10.0)
-      yajl-ruby (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
