@@ -94,7 +94,7 @@ API (write to *Emitter*)
 
 SensorReaderは、このAPIを使って開発するのが一般的な方法となります
 
-* [./tmp/in\_unix.sock](#./tmp/in_unix.sock)
+* [./tmp/in\_unix.sock](#.%2ftmp%2fin_unix.sock)
 * [./tmp/in\_literal.sock](#./tmp/in_literal.sock)
 
 ### ./tmp/in\_unix.sock ###
