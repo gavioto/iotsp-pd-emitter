@@ -29,7 +29,7 @@ What is *Emitter*
   * ログサイズ抑制
 
 
-<a name="quickstart">Quick start</a>
+Quick start
 -----------
 
 ### Requirements: ###
@@ -72,7 +72,7 @@ Another console => 2014-11-26 15:05:23 +0900 p0001.u.10021.DUID: {"data":"hello"
 It's so good !
 
 
-<a name="development">Development</a>
+Development
 ===========
 
 開発する必要のあるものは3つです
@@ -97,7 +97,7 @@ SensorReaderは、このAPIを使って開発するのが一般的な方法と�
 * [`./tmp/in_unix.sock`](#in_unix.sock)
 * [`./tmp/in_literal.sock`](#in_literal.sock)
 
-### <a name="in_unix.sock">`./tmp/in_unix.sock`</a> ###
+### <span id="in_unix.sock">`./tmp/in_unix.sock`</span> ###
 
 `in_unix.sock`は複雑な構造データの送信に適しています
 
@@ -133,7 +133,7 @@ UNIXSocket.open("./tmp/in_unix.sock"){|s|s.write packed}
 console => 2014-11-26 16:29:45 +0900 p0001.u.10021.y: {"title":"Sample","geo":[100,200]}
 ```
 
-### <a name="in_literal.sock">`./tmp/in_literal.sock`</a> ###
+### <span id="in_literal.sock">`./tmp/in_literal.sock`</span> ###
 
 `in_literal.sock`は簡易的なコーディングに適しています
 
@@ -154,7 +154,7 @@ UNIXSocket.open("./tmp/in_literal.sock"){|s|s.write data}
 console => 2014-11-26 16:30:29 +0900 p0001.u.10021.HOGE-FOOBAR: {"data":"This is test message"}
 ```
 
-<a name="callback">API (callback from *Emitter*)</a>
+API (callback from *Emitter*)
 ---------------------------
 
 *Emitter*は、*Emitter*自身のログから特定の文字列に反応して、割り当てられたcallbackプログラムを起動します
@@ -288,10 +288,10 @@ exit 0
 ```
 
 
-<a name="running">Running operation</a>
+Running operation
 ===================
 
-<a name="run_env">RUN\_ENV</a>
+<span id="run_env">RUN\_ENV</span>
 --------
 
 *Emitter*は環境変数`RUN_ENV`で読み込む設定ファイルを変更します
@@ -341,7 +341,7 @@ Daemonize
 Appendix
 ========
 
-<a name="setup_rbenv">rbenv setup</a>
+<span id="setup_rbenv">rbenv setup</span>
 -----------
 
 ```
@@ -357,7 +357,7 @@ $ gem install bundle --no-rdoc --no-ri
 $ rbenv rehash
 ```
 
-<a name="setup_apt">ruby setup by apt</a>
+<span id="setup_apt">ruby setup by apt</span>
 -----------
 
 ```
