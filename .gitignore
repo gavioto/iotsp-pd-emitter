@@ -1,0 +1,8 @@
+.bundle
+.ruby-version
+.rvmrc
+/vendor/bundle
+/config/*.json
+/tmp/*.sock
+/var/*.log
+

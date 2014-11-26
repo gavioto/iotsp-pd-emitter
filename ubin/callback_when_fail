@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require "json"
+require "pp"
+
+open(ARGV[0]).read.force_encoding('utf-8').split("\n").each do |r|
+  pp "this is #{$0} exec result"
+  pp JSON.parse(r)
+end
+
+exit 0
+
