@@ -335,7 +335,7 @@ Daemonize
 
 *Emitter*のdaemon化は[Supervisord](http://supervisord.org/)を推奨します
 
-supervisord用configは`vendor/supervisord\_emitter.conf`を利用してください
+supervisord用configは`vendor/supervisord_emitter.conf`を利用してください
 
 Install:
 
