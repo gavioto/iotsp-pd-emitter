@@ -42,11 +42,12 @@ Quick start
 
 ```
 $ cd /opt
-$ sudo git clone https://ssl.plathome.co.jp/git/iotsp/emitter.git
-$ sudo chown -R $USER /opt/emitter
+$ sudo git clone https://ssl.plathome.co.jp/git/git/iotsp/emitter.git
+$ sudo chown -R YOU /opt/emitter
 $ cd /opt/emitter
+### if using rbenv, run `rbenv local 1.9.3-p547 ; rbenv rehash`
 $ bundle install --path vendor/bundle --without development
-$ bundle rake install
+$ bundle exec rake install
 ```
 
 #### Boot on console ####
@@ -66,7 +67,7 @@ Send message:
 
 ```
 $ ruby -rsocket -e 'UNIXSocket.open("/opt/emitter/tmp/in_literal.sock"){|s|s.write "hello"}'
-Another console => 2014-11-26 15:05:23 +0900 p0001.u.10021.DUID: {"data":"hello"}
+Another console => 2014-11-26 15:05:23 +0900 p0001.u.10021.HOGE-FOOBAR: {"data":"hello"}
 ```
 
 It's so good !
@@ -341,6 +342,7 @@ Install:
 
 ```
 $ sudo apt-get install supervisor
+$ cd /opt/emitter
 $ sudo cp vendor/supervisord_emitter.conf /etc/supervisor/conf.d/emitter.conf
 $ sudo supervisorctl reload
 $ sudo supervisorctl status
@@ -349,8 +351,8 @@ $ sudo supervisorctl status
 Running operation:
 
 ```
-$ sudo supervisorctl restart main:emitter
 $ sudo supervisorctl tail -f main:emitter
+$ sudo supervisorctl restart main:emitter
 ```
 
 #### rbenv使用時 ####
