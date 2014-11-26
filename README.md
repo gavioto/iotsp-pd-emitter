@@ -15,9 +15,9 @@ What is *Emitter*
 
 ### Index ###
 
-* [セットアップ](#quickstart)
+* [セットアップ](#quick-start)
 * [開発](#development)
-* [運用](#running)
+* [運用](#running-operation)
 
 ### Specification ###
 
