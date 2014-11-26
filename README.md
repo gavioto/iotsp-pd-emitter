@@ -84,7 +84,7 @@ Development
 
 callbackにおいて不要なものは、`config/fluent.rb`で無効にする、`/dev/null`へリダイレクトする等して対応してください
 
-※オフライン開発(= クラウド側サービスが不要)が可能です。[`RUN_ENV`](#run_env)を参照ください
+※オフライン開発(= クラウド側サービスが不要)が可能です。[RUN\_ENV](#run_env)を参照ください
 
 API (write to *Emitter*)
 ----------------------
@@ -94,14 +94,14 @@ API (write to *Emitter*)
 
 SensorReaderは、このAPIを使って開発するのが一般的な方法となります
 
-* [`./tmp/in_unix.sock`](#in_unix.sock)
-* [`./tmp/in_literal.sock`](#in_literal.sock)
+* [./tmp/in\_unix.sock](#./tmp/in_unix.sock)
+* [./tmp/in\_literal.sock](#./tmp/in_literal.sock)
 
 ### ./tmp/in\_unix.sock ###
 
 `in_unix.sock`は複雑な構造データの送信に適しています
 
-MessagePackを使用する必要がある等、利用環境を選ぶため、より簡単な送信を行いたい場合は、[`in_literal.sock`](#in_literal.sock)の使用を検討してください
+MessagePackを使用する必要がある等、利用環境を選ぶため、より簡単な送信を行いたい場合は、[in\_literal.sock](#./tmp/in_literal.sock)の使用を検討してください
 
 Wire protocol
 
