@@ -35,7 +35,7 @@ Quick start
 ### Requirements: ###
 
 * Linux (Ubuntu 14.04 recommended)
-* Ruby 1.9 or higher (1.9 and [rbenv](#setup_rbenv) recommended, [apt](#setup_apt) OK)
+* Ruby 1.9 or higher (1.9 and [rbenv](#setup-rbenv) recommended, [apt](#ruby-setup-by-apt) OK)
   * gems are bundler
 
 ### Installation: ###
@@ -97,7 +97,7 @@ SensorReaderは、このAPIを使って開発するのが一般的な方法と�
 * [`./tmp/in_unix.sock`](#in_unix.sock)
 * [`./tmp/in_literal.sock`](#in_literal.sock)
 
-### <span id="in_unix.sock">`./tmp/in_unix.sock`</span> ###
+### `./tmp/in_unix.sock` ###
 
 `in_unix.sock`は複雑な構造データの送信に適しています
 
@@ -133,7 +133,7 @@ UNIXSocket.open("./tmp/in_unix.sock"){|s|s.write packed}
 console => 2014-11-26 16:29:45 +0900 p0001.u.10021.y: {"title":"Sample","geo":[100,200]}
 ```
 
-### <span id="in_literal.sock">`./tmp/in_literal.sock`</span> ###
+### `./tmp/in_literal.sock` ###
 
 `in_literal.sock`は簡易的なコーディングに適しています
 
@@ -341,7 +341,7 @@ Daemonize
 Appendix
 ========
 
-<span id="setup_rbenv">rbenv setup</span>
+rbenv setup
 -----------
 
 ```
@@ -357,8 +357,8 @@ $ gem install bundle --no-rdoc --no-ri
 $ rbenv rehash
 ```
 
-<span id="setup_apt">ruby setup by apt</span>
------------
+ruby setup by apt
+-----------------
 
 ```
 $ sudo apt-get install ruby1.9.3 ruby-dev build-essential curl git
