@@ -78,9 +78,9 @@ Development
 開発する必要のあるものは3つです
 
 1. センサーからデータを読み出し、_Emitter_へデータをwriteするプログラム(SensorReader)
-2. *Emitter*の送受信結果から起動されるプログラム(Callback)
-  1. 送信成功時のcallback
-  2. 〃失敗時のcallback
+* *Emitter*の送受信結果から起動されるプログラム(Callback)
+2. 送信成功時のcallback
+3. 〃失敗時のcallback
 
 callbackにおいて不要なものは、`config/fluent.rb`で無効にする、`/dev/null`へリダイレクトする等して対応してください
 
@@ -333,9 +333,46 @@ Parameters w/ boot
 Daemonize
 ---------
 
-当ライブラリは[supervisord](http://supervisord.org/)にてdaemon化します
+*Emitter*のdaemon化は[Supervisord](http://supervisord.org/)を推奨します
 
-設定は`vendor/supervisord\_emitter.conf`です
+supervisord用configは`vendor/supervisord\_emitter.conf`を利用してください
+
+Install:
+
+```
+$ sudo apt-get install supervisor
+$ sudo cp vendor/supervisord_emitter.conf /etc/supervisor/conf.d/emitter.conf
+$ sudo supervisorctl reload
+$ sudo supervisorctl status
+```
+
+Running operation:
+
+```
+$ sudo supervisorctl restart main:emitter
+$ sudo supervisorctl tail -f main:emitter
+```
+
+#### rbenv使用時 ####
+
+rbenvを使用している場合、`bundle`コマンドが見つからず、起動が出来ません
+
+```
+$ sudo supervisorctl status
+main:fluentd                     FATAL      can't find command 'bundle'
+```
+
+`rbenv shims`で見つけることのできる`bundle`コマンドを、command =に指定するようにしてください
+
+
+```
+$ rbenv shims | grep bundle$
+/home/ma2shita/.rbenv/shims/bundle
+```
+
+```
+command = /home/ma2shita/.rbenv/shims/bundle exec fluentd -c config/fluent.rb --suppress-repeated-stacktrace
+```
 
 
 Appendix
