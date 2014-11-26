@@ -95,13 +95,13 @@ API (write to *Emitter*)
 SensorReaderは、このAPIを使って開発するのが一般的な方法となります
 
 * [./tmp/in\_unix.sock](#.%2ftmp%2fin_unix.sock)
-* [./tmp/in\_literal.sock](#./tmp/in_literal.sock)
+* [./tmp/in\_literal.sock](#.%2ftmp%2fin_literal.sock)
 
 ### ./tmp/in\_unix.sock ###
 
 `in_unix.sock`は複雑な構造データの送信に適しています
 
-MessagePackを使用する必要がある等、利用環境を選ぶため、より簡単な送信を行いたい場合は、[in\_literal.sock](#./tmp/in_literal.sock)の使用を検討してください
+MessagePackを使用する必要がある等、利用環境を選ぶため、より簡単な送信を行いたい場合は、[in\_literal.sock](#.%2ftmp%2fin_literal.sock)の使用を検討してください
 
 Wire protocol
 
