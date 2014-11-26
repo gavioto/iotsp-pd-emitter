@@ -97,7 +97,7 @@ SensorReaderは、このAPIを使って開発するのが一般的な方法と�
 * [`./tmp/in_unix.sock`](#in_unix.sock)
 * [`./tmp/in_literal.sock`](#in_literal.sock)
 
-### `./tmp/in_unix.sock` ###
+### ./tmp/in\_unix.sock ###
 
 `in_unix.sock`は複雑な構造データの送信に適しています
 
@@ -133,7 +133,7 @@ UNIXSocket.open("./tmp/in_unix.sock"){|s|s.write packed}
 console => 2014-11-26 16:29:45 +0900 p0001.u.10021.y: {"title":"Sample","geo":[100,200]}
 ```
 
-### `./tmp/in_literal.sock` ###
+### ./tmp/in\_literal.sock ###
 
 `in_literal.sock`は簡易的なコーディングに適しています
 
