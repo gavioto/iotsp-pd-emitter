@@ -1,8 +1,0 @@
-{
-	"pfid": "p0001",
-	"wpver": "10021",
-	"endpoint": {
-		"http": "http://coreos01.hq.plathome.co.jp:3000/"
-	}
-}
-

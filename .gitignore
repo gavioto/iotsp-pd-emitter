@@ -2,7 +2,10 @@
 .ruby-version
 .rvmrc
 /vendor/bundle
-/config/*.json
 /tmp/*.sock
 /var/*.log
+/kinesis_demo
+/examples_sensor_reader
+/config/conf.d/*
+!/config/conf.d/debug_agent.rb
 

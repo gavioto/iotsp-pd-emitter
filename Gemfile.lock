@@ -1,17 +1,9 @@
 GIT
   remote: git://github.com/ma2shita/fluent-plugin-in_unix_unimsg.git
-  revision: 500e9abe2faebc557a010a7a6eec80a75a9cedc4
+  revision: 84fc3dd28066f70b0d1ddcde3f8edd93b84e3cc9
   specs:
-    fluent-plugin-in_unix_unimsg (0.0.1)
+    fluent-plugin-in_unix_unimsg (0.0.2)
       fluentd
-
-GIT
-  remote: git://github.com/ma2shita/fluent-plugin-out-http-alt.git
-  revision: 468edf97da6f9633ff3c95da18ccd41ffe239302
-  specs:
-    fluent-plugin-out-http-alt (0.0.1)
-      fluentd (~> 0.10.0)
-      yajl-ruby (~> 1.0)
 
 GIT
   remote: git://github.com/ma2shita/fluent-plugin-record-modifier.git
@@ -26,7 +18,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
-    columnize (0.8.9)
+    columnize (0.9.0)
     cool.io (1.2.4)
     debugger (1.6.8)
       columnize (>= 0.3.1)
@@ -39,7 +31,7 @@ GEM
       uuidtools (>= 2.1.5)
     fluent-plugin-grep (0.3.3)
       fluentd
-    fluentd (0.10.57)
+    fluentd (0.10.58)
       cool.io (>= 1.1.1, < 2.0.0, != 1.2.0)
       http_parser.rb (>= 0.5.1, < 0.7.0)
       json (>= 1.4.3)
@@ -59,7 +51,7 @@ GEM
     pry-debugger (0.2.3)
       debugger (~> 1.3)
       pry (>= 0.9.10, < 0.11.0)
-    rake (10.4.0)
+    rake (10.4.2)
     sigdump (0.2.2)
     slop (3.6.0)
     thread_safe (0.3.4)
@@ -76,7 +68,6 @@ PLATFORMS
 DEPENDENCIES
   fluent-plugin-grep
   fluent-plugin-in_unix_unimsg!
-  fluent-plugin-out-http-alt!
   fluent-plugin-record-modifier!
   fluentd
   pry-debugger
