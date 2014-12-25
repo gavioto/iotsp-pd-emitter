@@ -93,8 +93,8 @@ Another console:
 
 It's so good !
 
-Configuring *Emitter*
--------------------
+Configuring
+-----------
 
 設定は3つの項目を行います
 
@@ -302,4 +302,3 @@ $ sudo gem install bundle rake --no-rdoc --no-ri
 ```
 
 EoT
-
