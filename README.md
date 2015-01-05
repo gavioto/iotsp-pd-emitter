@@ -133,9 +133,9 @@ match("fluentlog") {
 
 この設定で、Quick StartのTry Itのような動作となります
 
-また`bin/emitter-logger`を下記の通り実行すると、callbackプログラムが実行されます
+また`bin/emitter-log-injector`を下記の通り実行すると、callbackプログラムが実行されます
 
-`$ bundle exec bin/emitter-logger -l warn -m AnyError`
+`$ bundle exec bin/emitter-log-injector -l warn -m AnyError`
 
 *Emitter* は[Fluentd](http://fluentd.org)を使用しています。そのため[FluentdのPlugin](http://www.fluentd.org/plugins)をすべて活用可能です
 
@@ -227,9 +227,9 @@ $ rbenv shims | grep bundle$
 command = /home/USERNAME/.rbenv/shims/bundle exec fluentd -c config/fluent.rb --suppress-repeated-stacktrace
 ```
 
-### `bin/emitter-logger`コマンド ###
+### `bin/emitter-log-injector`コマンド ###
 
-`bin/emitter-logger` は、callbackプログラムの開発用です
+`bin/emitter-log-injector` は、callbackプログラムの開発用です
 
 ログに特定の文字列を書き込み、callbackの動作を検証することが出来ます
 
