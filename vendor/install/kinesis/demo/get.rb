@@ -1,7 +1,6 @@
 # coding: utf-8
 require "aws-sdk"
 require "json"
-require "base64"
 
 $conf = {}
 $conf.merge!(JSON.load(open("config/conf.d/kinesis.json"))) if File.exists? "config/conf.d/kinesis.json"
@@ -17,8 +16,7 @@ shards.map(&:shard_id).each do |shard_id|
   shard_iterator = client.get_shard_iterator(stream_name: stream, shard_id: shard_id, shard_iterator_type: "TRIM_HORIZON").shard_iterator
   records_info = client.get_records(shard_iterator: shard_iterator, limit: 100)
   records_info.records.each do |record|
-    r = Base64.strict_decode64(record.data).force_encoding('utf-8')
-    p JSON.parse(r)
+    p JSON.parse(record.data)
   end
 end
 

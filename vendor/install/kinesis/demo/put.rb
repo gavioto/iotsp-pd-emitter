@@ -1,3 +1,4 @@
+# coding: utf-8
 require "socket"
 
 data = "This is test message for Amazon Kinesis"
