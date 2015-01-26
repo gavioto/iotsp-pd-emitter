@@ -67,13 +67,13 @@ $ sudo chown -R YOU /opt/emitter
 $ cd /opt/emitter
 ### if using rbenv, run `rbenv local 1.9.3-p547 ; rbenv rehash`
 $ bundle install --path vendor/bundle --without development
-$ bundle exec rake install:demo install:examples
 ```
 
-#### Start (on console) ####
+#### Start with DEMO ####
 
 ```
 $ cd /opt/emitter
+$ bundle exec rake install:demo install:examples
 $ RUN_ENV=development bundle exec rake start
 ```
 
