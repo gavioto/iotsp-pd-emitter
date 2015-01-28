@@ -22,13 +22,13 @@ namespace :install do
     puts <<-EOT
 
     ##
-    ## Install successed.
-    ## Run `bundle install` to complete the setup.
+    ## Examples install successed.
     ##
 
     QuickStart:
 
-    1. `bundle exec rake start`
+    At once `bundle install`
+    1. `RUN_ENV=development bundle exec rake start`
     2. `bundle exec ruby examples_sensor_reader/in_literal.rb` on other console
     => Message will be displayed on the "rake start" console.
 
