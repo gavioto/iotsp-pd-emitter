@@ -9,4 +9,5 @@
 /config/conf.d/*
 !/config/conf.d/debug_agent.rb
 /config/gemfile.d/*
+/node_modules/
 
