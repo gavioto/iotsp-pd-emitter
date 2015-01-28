@@ -74,24 +74,33 @@ $ bundle install --path vendor/bundle --without development
 ```
 $ cd /opt/emitter
 $ bundle exec rake install:demo install:examples
+$ bundle install
 $ RUN_ENV=development bundle exec rake start
 ```
 
 STOP is `Ctrl+C`
 
-#### Try it !! ####
+#### Try DEMO !! ####
 
 On other console ...
 
 Send message:
 
 ```
-$ bundle exec ruby -rsocket -e 'UNIXSocket.open("/opt/emitter/tmp/in_unix_unimsg.sock"){|s|s.write "hello"}'
-Another console:
-2014-11-26 15:05:23 +0900 test.msg: {"data":"hello"}
+$ cd /opt/emitter
+$ bundle exec ruby -rsocket -e 'UNIXSocket.open("tmp/demo_in_unix_unimsg.sock"){|s|s.write "hello"}'
+$ bundle exec bin/emitter-log-injector -l warn -m "AnyError"
+$ bundle exec bin/emitter-log-injector -l info -m "AnySuccess"
 ```
 
-It's so good !
+See "rake start" console.
+
+#### Try EXAMPLES !! ####
+
+* Ruby:    `ruby examples_sensor_reader/in_literal.rb`
+* Python:  `python examples_sensor_reader/in_literal.py`
+* node.js: `node examples_sensor_reader/in_literal.js`
+* c:       `gcc examples_sensor_reader/in_literal.c ; ./a.out`
 
 Configuring
 -----------
@@ -106,7 +115,7 @@ Configuring
 
 以下、`install:demo`でインストールされる設定サンプル
 
-`config/conf.d/demo.rb`:
+`config/conf.d/demo_main.rb`:
 
 ```
 # REQUIRE: entrypoint(input) from App
@@ -120,14 +129,6 @@ source {
 # REQUIRE: emit to the network/Cloud
 match("test.msg.**") {
   type :stdout
-}
-
-# OPTION: callback from emit result
-match("fluentlog") {
-  type :grep
-  regexp1 "tag fluent.warn"
-  regexp2 "message AnyError"
-  add_tag_prefix :out_fail
 }
 ```
 
