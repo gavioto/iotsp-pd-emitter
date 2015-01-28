@@ -4,7 +4,7 @@ gem "fluentd", "~> 0.10.0"
 gem "fluent-plugin-in_unix_unimsg", :github => "ma2shita/fluent-plugin-in_unix_unimsg"
 
 group :development do
-  gem "pry-byebug"
+  gem "pry-debugger"
   gem "pry-stack_explorer"
 end
 
