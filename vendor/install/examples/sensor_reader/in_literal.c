@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 #define SEND_DATA "This is test message from C lang client"
-char *socket_path = "./tmp/in_literal.sock";
+char *socket_path = "./tmp/example_in_literal.sock";
 
 int main(int argc, char *argv[]) {
 	struct sockaddr_un addr;

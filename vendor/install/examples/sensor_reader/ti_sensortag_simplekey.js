@@ -28,7 +28,7 @@ SensorTag.discover(function(sensorTag) { console.log(">> STOP: Ctrl+C or SensorT
 						}
 						if (0x00 != (btn_st & 0x11)) {
 							console.log(send_str);
-							var client = net.connect({path: './tmp/in_literal.sock'}, function() {
+							var client = net.connect({path: './tmp/example_in_literal.sock'}, function() {
 								client.write(send_str);
 								client.end();
 							});
