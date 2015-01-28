@@ -105,6 +105,8 @@ See "rake start" console.
 Configuring
 -----------
 
+!!! This section is WIP. !!!
+
 設定は3つの項目を行います
 
 1. センサー制御アプリからのデータ入力の設定
