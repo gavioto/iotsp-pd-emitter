@@ -1,6 +1,7 @@
 // node.js v0.10.25 or higher | ref: https://gist.github.com/ma2shita/c5daa68069837639c374
 // $ cd EMITTER_ROOT
-// $ sudo node example/ti_sensortag_simplekey.js
+// $ npm install sensortag
+// $ sudo node examples_sensor_reader/ti_sensortag_simplekey.js
 var SensorTag = require('sensortag');
 var net = require('net');
 
