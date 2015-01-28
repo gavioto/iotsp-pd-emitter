@@ -56,6 +56,8 @@ namespace :install do
   task :kinesis_demo do
     mkdir_p "config/conf.d/"
     cp FileList["vendor/install/kinesis/conf.d/*.*"], "config/conf.d/"
+    mkdir_p "config/gemfile.d/"
+    cp FileList["vendor/install/kinesis/gemfile.d/*.*"], "config/gemfile.d/"
     mkdir_p "kinesis_demo"
     cp FileList["vendor/install/kinesis/demo/*.*"], "kinesis_demo/"
     puts <<-EOT
@@ -66,16 +68,13 @@ namespace :install do
 
   QuickStart:
 
-  1. Add
-    gem "fluent-plugin-kinesis", :github => "awslabs/aws-fluent-plugin-kinesis"
-    gem "aws-sdk"
-    to Gemfile, and exec `bundle install`
-  2. Set your AWS account to config/conf.d/kinesis.json
-  3. Your SensorReader rewrite, write to `./tmp/in_literal_kinesis.sock`
-     Run your SensorReader! (or kinesis_demo/put.rb)
-
-  Appendix:
-  1. kinesis_demo/get.rb is get data example file.
+  At once: `bundle install`
+         : Set your AWS account to config/conf.d/kinesis.json
+  Start  : `RUN_ENV=development bundle exec rake start`
+  #> Run on other console and pay attension to "rake start" console.
+  1. `bundle exec ruby kinesis_demo/put.rb`
+    (1~2 minute wait...)
+  2. `bundle exec ruby kinesis_demo/get.rb`
 
     EOT
   end

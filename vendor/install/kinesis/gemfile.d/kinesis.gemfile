@@ -1,0 +1,2 @@
+gem "aws-sdk"
+gem "fluent-plugin-kinesis", :github => "awslabs/aws-fluent-plugin-kinesis"

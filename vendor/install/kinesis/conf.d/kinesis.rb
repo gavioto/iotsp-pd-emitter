@@ -13,7 +13,7 @@ kinesis = ruby {
 # input from sensorPGM
 source {
   type :unix_unimsg
-  path "./tmp/in_literal_kinesis.sock"
+  path "./tmp/kinesis_in_literal.sock"
   key :data
   tag "to.kinesis.test"
 }
@@ -32,13 +32,5 @@ match("to.kinesis.**") {
   store {
     type :stdout
   }
-}
-
-# callback from emit result
-match("fluentlog") {
-  type :grep
-  regexp1 "tag fluent.warn"
-  regexp2 "message Seahorse::Client::Http::Error"
-  add_tag_prefix :out_fail
 }
 
