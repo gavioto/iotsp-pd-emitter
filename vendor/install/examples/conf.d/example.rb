@@ -1,7 +1,7 @@
 # two entrypoints.
 source {
   type :unix_unimsg
-  path "./tmp/in_lietral.sock"
+  path "./tmp/in_literal.sock"
   tag "example.data.in_literal"
 }
 source {

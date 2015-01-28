@@ -15,8 +15,24 @@ namespace :install do
   task :examples do
     mkdir_p "config/conf.d/"
     cp FileList["vendor/install/examples/conf.d/*.*"], "config/conf.d/"
+    mkdir_p "config/gemfile.d/"
+    cp FileList["vendor/install/examples/gemfile.d/*.*"], "config/gemfile.d/"
     mkdir_p "examples_sensor_reader"
     cp FileList["vendor/install/examples/sensor_reader/*.*"], "examples_sensor_reader/"
+    puts <<-EOT
+
+    ##
+    ## Install successed.
+    ## Run `bundle install` to complete the setup.
+    ##
+
+    QuickStart:
+
+    1. `bundle exec rake start`
+    2. `bundle exec ruby examples_sensor_reader/in_literal.rb` on other console
+    => Message will be displayed on the "rake start" console.
+
+    EOT
   end
 
   desc "Install Amazon Kinesis Demo"

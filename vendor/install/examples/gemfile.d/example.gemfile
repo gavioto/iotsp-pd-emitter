@@ -1,0 +1,1 @@
+gem "fluent-plugin-in_unix_unimsg", :github => "ma2shita/fluent-plugin-in_unix_unimsg"

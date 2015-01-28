@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define SEND_DATA "This is test message from client\n"
+#define SEND_DATA "This is test message from C lang client"
 char *socket_path = "./tmp/in_literal.sock";
 
 int main(int argc, char *argv[]) {
