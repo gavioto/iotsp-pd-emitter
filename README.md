@@ -1,8 +1,8 @@
-Emitter - IoT Data Transmitter
+PD Emitter - IoT Network Stack
 ==============================
 
-What is *Emitter*
----------------
+What is *PD Emitter*
+------------------
 
 これはセンサー制御機器とクラウド間のデータ送受信を容易にする通信ミドルウェアです
 
@@ -14,14 +14,19 @@ What is *Emitter*
     +----------+    +------------------+
                          ^
                          |
-                      インストール対象
+                      PD Emitterのインストール対象
 ```
 
 このライブラリは様々なクラウドサービスのAPIコールを肩代わりしてくれる他、通信が不安定な環境においても確実にデータ伝送を実現する機能が実装済です
 
 これにより、データ伝送にまつわるコーディングは不要となり、センサー制御のプログラム開発に集中することが出来ます
 
-[Amazon Kinesisへのデータ送信デモ](#amazon-kinesis)を同梱しており、AWSアカウントがあればすぐに体験いただくことができます
+対応クラウドサービス
+--------------------
+
+* Amazon Web Services
+    * [Amazon Kinesis](#amazon-kinesis)
+* Generic HTTP REST API
 
 ### Index ###
 
@@ -31,21 +36,27 @@ What is *Emitter*
 * [開発](#development)
 * [運用](#running-operation)
 
-* 同梱の[Amazon Kinesisデータ送信デモ](#amazon-kinesis)について
+Demos
 
-* Appendix
-    * [Ruby setup by rbenv](#ruby-setup-by-rbenv)
-    * [Ruby setup by apt](#ruby-setup-by-apt)
+* Examples
+   * [Any Languages](#any-languages)
+   * [Structured Data](#structured-data)
+* [Amazon Kinesis](#amazon-kinesis)
+
+Appendix
+
+* [Ruby setup by rbenv](#ruby-setup-by-rbenv)
+* [Ruby setup by apt](#ruby-setup-by-apt)
 
 Features
 --------
 
-* メッセージスプール/再送
-    * 成功/失敗時のコールバック
+* メッセージの蓄積/再送
+    * 送受信成功/失敗時のコールバックプログラムの起動
 * プロセス(daemon)制御※
+    * 死活監視API
     * ログサイズ抑制
 * プラガブルアーキテクチャ
-    * Cloud API
 
 ※プロセス制御にsupervisordを使用の場合
 
@@ -55,102 +66,66 @@ Quick start
 ### Requirements ###
 
 * Linux (Ubuntu 14.04 recommended)
-* Ruby 1.9 or higher (1.9 and [rbenv](#ruby-setup-by-rbenv) recommended, [apt](#ruby-setup-by-apt) OK)
+* Ruby 1.9 or higher (1.9 w/ [apt](#ruby-setup-by-apt) recommended, [rbenv](#ruby-setup-by-rbenv) ready)
     * gems are bundler
 
 ### Installation ###
 
 ```
 $ cd /opt
-$ sudo git clone https://ssl.plathome.co.jp/git/git/iotsp/emitter.git
-$ sudo chown -R YOU /opt/emitter
-$ cd /opt/emitter
+$ sudo git clone https://github.com/plathome/pd-emitter.git
+$ sudo chown -R YOU /opt/pd-emitter
+$ cd /opt/pd-emitter
 ### if using rbenv, run `rbenv local 1.9.3-p547 ; rbenv rehash`
 $ bundle install --path vendor/bundle --without development
 ```
 
-#### Start with DEMO ####
+`/opt` is example.
+
+#### Start ####
 
 ```
-$ cd /opt/emitter
-$ bundle exec rake install:demo install:examples
-$ bundle install
-$ RUN_ENV=development bundle exec rake start
+$ cd /opt/pd-emitter
+$ bundle exec rake start
 ```
 
 STOP is `Ctrl+C`
 
+See [Daemonize](#daemonize) if you want daemon.
+
 #### Try DEMO !! ####
 
-On other console ...
+Run on the other console and see "rake start" console.
 
 Send message:
 
 ```
-$ cd /opt/emitter
-$ bundle exec ruby -rsocket -e 'UNIXSocket.open("tmp/demo_in_unix_unimsg.sock"){|s|s.write "hello"}'
-$ bundle exec bin/emitter-log-injector -l warn -m "AnyError"
-$ bundle exec bin/emitter-log-injector -l info -m "AnySuccess"
+$ cd /opt/pd-emitter
+$ bundle exec ruby -rsocket -e 'UNIXSocket.open("tmp/in.sock"){|s|s.write "hello"}'
 ```
 
-See "rake start" console.
+Callback:
 
-#### Try EXAMPLES !! ####
-
-* Ruby:    `ruby examples_sensor_reader/in_literal.rb`
-* Python:  `python examples_sensor_reader/in_literal.py`
-* node.js: `node examples_sensor_reader/in_literal.js`
-* c:       `gcc examples_sensor_reader/in_literal.c ; ./a.out`
+```
+$ cd /opt/pd-emitter
+$ bundle exec bin/debug_log-injector -l warn -m "AnyError"
+$ bundle exec bin/debug_log-injector -l info -m "AnySuccess"
+```
 
 Configuring
 -----------
 
 !!! This section is WIP. !!!
 
-設定は3つの項目を行います
-
-1. センサー制御アプリからのデータ入力の設定
-2. データ出力の設定
-3. データ送信結果に応じたcallbackの設定 (任意)
-
-1と2は必須です。3は必要に応じて設定します
-
-以下、`install:demo`でインストールされる設定サンプル
-
-`config/conf.d/demo_main.rb`:
-
-```
-# REQUIRE: entrypoint(input) from App
-source {
-  type :unix_unimsg
-  path "./tmp/in_demo.sock"
-  key :data
-  tag "test.msg"
-}
-
-# REQUIRE: emit to the network/Cloud
-match("test.msg.**") {
-  type :stdout
-}
-```
-
-この設定で、Quick StartのTry Itのような動作となります
-
-また`bin/emitter-log-injector`を下記の通り実行すると、callbackプログラムが実行されます
-
-`$ bundle exec bin/emitter-log-injector -l warn -m AnyError`
-
-*Emitter* は[Fluentd](http://fluentd.org)を使用しています。そのため[FluentdのPlugin](http://www.fluentd.org/plugins)をすべて活用可能です
-
 Development
 -----------
 
 センサー制御機器での開発で必要なことは大きく２つです
 
-1. Emitterの設定
+1. *PD Emitter*の設定
 2. プログラム開発
-    * センサーからデータを読み出し、 *Emitter* へデータをwriteするプログラム(SensorReader)
-    * *Emitter* の送受信結果から起動されるプログラム(Callback)※
+    * センサーからデータを読み出し、 *PD Emitter* へデータをwriteするプログラム(SensorReader)
+    * *PD Emitter* の送受信結果から起動されるプログラム(Callback)※
         1. 送信成功時用
         2. 〃失敗時用
 
@@ -161,22 +136,22 @@ Development
 SensorReaderの実装は、主に以下の流れとなります
 
 1. センサーからのデータ読み出し
-2. *Emitter* へのデータ書き込み
+2. *PD Emitter* へのデータ書き込み
 
-*Emitter* へのデータ書き込み方法は *Emitter* の設定状況によりますが、UNIX Domain Socketを推奨しています
+センサーからのデータ読み出しは、個々に実装願います
 
-unix\_unimsgを使用する場合ならば、[Quick start](#quick-start)に書いてあるとおり、単純な文字列をUNIX Domain socketに書き込むだけです
+*PD Emitter* へのデータ書き込み方法はUNIX Domain Socketを推奨しています
 
-Running operation
------------------
+※in\_unix\_unimsgを使用する場合ならば、プレーンな文字列をUNIX Domain socketに書き込むだけです
+
+Operation
+---------
 
 ### RUN\_ENV 環境変数 ###
 
-*Emitter *は環境変数`RUN_ENV`で読み込む設定ファイルを変更します
+*PD Emitter *は環境変数`RUN_ENV`で読み込む設定ファイルを変更します※
 
-主にオフライン開発用として使用します
-
-* `RUN_ENV` = (nil) or development
+※`rake start`を通じた起動の場合
 
 e.g. )
 
@@ -189,25 +164,27 @@ $ RUN_ENV=development bundle exec rake start
 
 ### Daemonize ###
 
-*Emitter *のdaemon化は[Supervisord](http://supervisord.org/)を推奨します
+*PD Emitter *のdaemon化は[Supervisord](http://supervisord.org)を推奨します
 
-supervisord用configは`vendor/supervisord_emitter.conf`を利用してください
+supervisord用configは`vendor/supervisord_pd-emitter.conf`を利用してください
 
 Install:
 
 ```
 $ sudo apt-get install supervisor
-$ cd /opt/emitter
-$ sudo cp vendor/supervisord_emitter.conf /etc/supervisor/conf.d/emitter.conf
+$ cd /opt/pd-emitter
+$ sudo cp vendor/supervisord_pd-emitter.conf /etc/supervisor/conf.d/pd-emitter.conf
 $ sudo supervisorctl reload
 $ sudo supervisorctl status
 ```
 
-Running operation:
+Operation:
 
 ```
-$ sudo supervisorctl tail -f main:emitter
-$ sudo supervisorctl restart main:emitter
+Log:
+  $ sudo supervisorctl tail -f main:pd-emitter
+Restart(Reload):
+  $ sudo supervisorctl restart main:pd-emitter
 ```
 
 #### rbenv使用時 ####
@@ -216,7 +193,7 @@ rbenvを使用している場合、`bundle`コマンドが見つからず、起�
 
 ```
 $ sudo supervisorctl status
-main:fluentd                     FATAL      can't find command 'bundle'
+main:pd-emitter                     FATAL      can't find command 'bundle'
 ```
 
 `rbenv shims`で見つけることのできる`bundle`コマンドを、command =に指定するようにしてください
@@ -226,22 +203,46 @@ $ rbenv shims | grep bundle$
 /home/USERNAME/.rbenv/shims/bundle
 ```
 
+supervisord\_pd-emitter.conf:
+
 ```
-command = /home/USERNAME/.rbenv/shims/bundle exec fluentd -c config/fluent.rb --suppress-repeated-stacktrace
+command = /home/USERNAME/.rbenv/shims/bundle exec rake start
 ```
 
-### `bin/emitter-log-injector`コマンド ###
+### `bin/debug_log-injector`コマンド ###
 
-`bin/emitter-log-injector` は、callbackプログラムの開発用です
+`bin/debug_log-injector` は、callbackプログラムの開発用です
 
 ログに特定の文字列を書き込み、callbackの動作を検証することが出来ます
+
+`bundle exec ruby bin/debug_log-injector --help`をご覧ください
+
+
+Demos
+=====
+
+Examples
+--------
+
+### Any Languages ###
+
+!!! This section is WIP. !!!
+
+PD Emitterは、UNIX Domain Socketによる待受/通信を行うため、センサー制御プログラムの開発言語を選びません
+
+
+### Structured Data ###
+
+!!! This section is WIP. !!!
+
+PD Emitterは構造化データに対応しています
 
 Amazon Kinesis
 --------------
 
-Amazon Kinesisへのデータ送信デモを同梱しています
+!!! This section is WIP. !!!
 
-AWSのアカウントがあれば、Kinesisへのデータ送信をすぐに体験していただけます
+Amazon Kinesisへのデータ送信デモ (要AWSアカウント)
 
 ### AWS上での準備 ###
 
@@ -254,23 +255,20 @@ AWSのアカウントがあれば、Kinesisへのデータ送信をすぐに体�
 
 以上はAWSのマニュアルを参照ください
 
-### *Emitter* の準備 ###
+### *PD Emitter* の準備 ###
 
-まず、 [*Emitter* のセットアップ](#quick-start)を完了させてください
+まず、 [*PD Emitter* のセットアップ](#quick-start)を完了させてください
 
 その後、下記でAmazon Kinesisデータ送信デモの環境がインストールされます
 
-```
-$ bundle exec rake install:kinesis_demo
-```
 
-以上で、config/conf.d/にkinesis.(rb|json)が、 *Emitter* のアプリrootにkinesis\_demo/が作成されます (不要になったら削除可能)
+以上で、config/conf.d/にkinesis.(rb|json)が、 *PD Emitter* のアプリrootにkinesis\_demo/が作成されます (不要になったら削除可能)
 
 インストール後のメッセージに従って、Gemfileの更新と`bundle install`の実行、`config/conf.d/kinesis.json`の編集を行ってください
 
 ### デモの実行 ###
 
-*Emitter* を `bundle exec rake start` で起動させた後、別のターミナルから `bundle exec ruby kinesis_demo/put.rb` を実行してみてください
+*PD Emitter* を `bundle exec rake start` で起動させた後、別のターミナルから `bundle exec ruby kinesis_demo/put.rb` を実行してみてください
 
 `{"data"=>"This is test message for Amazon Kinesis, "time"=> ...}` というJSONデータがKinesisへ送信されます
 
