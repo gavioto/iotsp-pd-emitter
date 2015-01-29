@@ -39,8 +39,8 @@ What is *PD Emitter*
 Demos
 
 * Examples
-   * [Any Languages](#any-languages)
-   * [Structured Data](#structured-data)
+    * [Any Languages](#any-languages)
+    * [Structured Data](#structured-data)
 * [Amazon Kinesis](#amazon-kinesis)
 
 Appendix
@@ -149,7 +149,7 @@ Operation
 
 ### RUN\_ENV 環境変数 ###
 
-*PD Emitter *は環境変数`RUN_ENV`で読み込む設定ファイルを変更します※
+*PD Emitter* は環境変数`RUN_ENV`で読み込む設定ファイルを変更します※
 
 ※`rake start`を通じた起動の場合
 
@@ -164,7 +164,7 @@ $ RUN_ENV=development bundle exec rake start
 
 ### Daemonize ###
 
-*PD Emitter *のdaemon化は[Supervisord](http://supervisord.org)を推奨します
+*PD Emitter* のdaemon化は[Supervisord](http://supervisord.org)を推奨します
 
 supervisord用configは`vendor/supervisord_pd-emitter.conf`を利用してください
 
