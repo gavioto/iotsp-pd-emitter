@@ -1,6 +1,3 @@
-PD Emitter - IoT Network Stack
-==============================
-
 What is *PD Emitter*
 ------------------
 
