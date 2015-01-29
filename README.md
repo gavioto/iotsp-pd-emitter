@@ -21,14 +21,14 @@ What is *PD Emitter*
 
 これにより、データ伝送にまつわるコーディングは不要となり、センサー制御のプログラム開発に集中することが出来ます
 
-対応クラウドサービス
---------------------
+**対応クラウドサービス**
 
 * Amazon Web Services
     * [Amazon Kinesis](#amazon-kinesis)
 * Generic HTTP REST API
 
-### Index ###
+Index
+-----
 
 * [特徴](#features)
 * [Quick Start](#quick-start)
